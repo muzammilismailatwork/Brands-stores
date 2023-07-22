@@ -30,6 +30,18 @@
                     <p>Stores</p>
                 </a>
             </li>
+            <li class="@if(Route::is("manage_brands")) active @endif">
+                <a href="{{route("manage_brands")}}">
+                    <i class="nc-icon nc-tile-56"></i>
+                    <p>Manage Brands</p>
+                </a>
+            </li>
+            <li class="@if(Route::is("manage_stores")) active @endif">
+                <a href="{{route("manage_stores")}}">
+                    <i class="nc-icon nc-shop"></i>
+                    <p>Manage Stores</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

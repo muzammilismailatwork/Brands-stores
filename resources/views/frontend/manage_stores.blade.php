@@ -1,6 +1,6 @@
 @extends("layouts.dashboard.app")
 @section("title")
-    Stores
+    Manage Stores
 @endsection
 @section("content")
     <div class="content">
@@ -10,6 +10,11 @@
                     <div class="card-header">
                         <h4 class="card-title"> Stores List</h4>
                     </div>
+                    <form method="GET", action="{{route("create_store")}}">
+                    <div class="d-flex justify-content-end mx-5">
+                        <button class="btn bg-primary text-dark">Create Store</button>
+                    </div>
+                    </form>
                     <div class="col-md-4">
                         <form method="GET" action="{{route("stores")}}">
                             <div class="ml-2 mx-3">
@@ -44,6 +49,9 @@
                                 <th>
                                     Brand ID
                                 </th>
+                                <th>
+                                    Action
+                                </th>
                                 </thead>
                                 <tbody>
                                 @foreach($stores as $store)
@@ -66,6 +74,17 @@
                                     </td>
                                     <td>
                                         {{$store->brand->id}}
+                                    </td>
+                                    <td>
+                                        <form action="{{route("edit_store", [$store->id])}}" method="get" style="display: inline">
+                                            @csrf
+                                            <button type="submit"><i class="fas fa-edit"></i></button>
+                                        </form>
+                                        <form action="{{route("delete_store",[$store->id])}}" method="post" style="display: inline">
+                                            @csrf
+                                            <input type="hidden" value="{{$store->id}}">
+                                            <button class="mx-2" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

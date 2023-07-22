@@ -1,6 +1,6 @@
 @extends("layouts.dashboard.app")
 @section("title")
-    Brands
+    Manage Brands
 @endsection
 @section("content")
     <div class="content">
@@ -10,12 +10,17 @@
                     <div class="card-header">
                         <h4 class="card-title"> Brands List</h4>
                     </div>
+                    <form method="GET", action="{{route("create_brand")}}">
+                    <div class="d-flex justify-content-end mx-5">
+                        <button type="submit" class="btn bg-primary text-dark">Create Brand</button>
+                    </div>
+                    </form>
                     <div class="col-md-4">
                     <form method="GET" action="{{route("brands")}}">
                     <div class="ml-2 mx-3">
                         <div class="form-group d-flex">
-                            <select name="sort" class="form-control mt-2 mb-2">
-                                <option value="Disabled">Sorting</option>1
+                            <select name="sort" class="form-control mt-2 mb-2"   >
+                                <option value="Disabled">Sorting</option>
                                 <option value="latest">Latest</option>
                                 <option value="random">Random</option>
                                 <option value="oldest">Oldest</option>
@@ -44,6 +49,9 @@
                                 <th>
                                     Status
                                 </th>
+                                <th>
+                                    Action
+                                </th>
                                 </thead>
                                 <tbody>
                                 @foreach($brands as $brand)
@@ -66,6 +74,17 @@
                                         @else($brand->status == "Inactive")
                                             <button class="btn btn-danger">{{$brand->status}}</button>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <form action="{{route("edit_brand", [$brand->id])}}" method="get" style="display: inline">
+                                            @csrf
+                                            <button type="submit"><i class="fas fa-edit"></i></button>
+                                        </form>
+                                        <form action="{{route("delete_brand",[$brand->id])}}" method="post" style="display: inline">
+                                            @csrf
+                                            <input type="hidden" value="{{$brand->id}}">
+                                            <button class="mx-2" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

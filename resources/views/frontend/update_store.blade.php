@@ -1,6 +1,6 @@
 @extends("layouts.dashboard.app")
 @section("title")
-    Create Srore
+    Update Srore
 @endsection
 @section("content")
     <div class="content">
@@ -8,16 +8,16 @@
             <div class="col-md-8">
                 <div class="card card-user">
                     <div class="card-header">
-                        <h5 class="card-title">Enter Store Information</h5>
+                        <h5 class="card-title">Edit Store Information</h5>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{route("add_store")}}">
+                        <form method="POST" action="{{route("update_store", [$store->id])}}">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Store Name</label>
-                                        <input type="text" name="name" class="form-control">
+                                        <input type="text" name="name" value="{{$store->name}}" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -26,9 +26,9 @@
                                     <div class="form-group">
                                         <label>Store Status</label>
                                             <select name="status" class="form-control">
-                                                <option value="Disabled">Select Store Status</option>
-                                                <option value="{{ config('status.status_options.Active') }}">Active</option>
-                                                <option value="{{ config('status.status_options.Inactive') }}">Inactive</option>
+                                                <option value="Disabled">Select Brand Status</option>
+                                                <option value="{{ config('status.status_options.Active') }}"  @if($store->status === "Active") selected @endif>Active</option>
+                                                <option value="{{ config('status.status_options.Inactive') }}"  @if($store->status === "Inactive") selected @endif>Inactive</option>
                                             </select>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                                         <select name="brand_id" class="form-control">
                                             <option value="Disabled">Select Brand</option>
                                             @foreach($brands as $brand)
-                                            <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                <option @if($brand->id == $store->brand_id) selected @endif value="{{$brand->id}}">{{$brand->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -48,7 +48,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Address</label>
-                                        <textarea name="address" class="form-control" ></textarea>
+                                        <textarea name="address" value="{{$store->address}}" class="form-control" >{{$store->address}}</textarea>
                                     </div>
                                 </div>
                             </div>

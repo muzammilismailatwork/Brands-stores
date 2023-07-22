@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->rename()
+            $table->string("name");
+            $table->string("website");
+            $table->enum("status",["Active", "Inactive"])->default("Inactive");
             $table->timestamps();
         });
     }
