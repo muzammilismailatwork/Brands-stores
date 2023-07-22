@@ -29,12 +29,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                @if (Route::has('forgot_password'))
-                                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-3" href="{{ route('forgot_password') }}">
-                                        {{ __('Forgot your password?') }}
-                                    </a>
-                                @endif
+                            <div class="row d-flex">
+                                    @if (Route::has('signup'))
+                                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-3" href="{{ route('signup') }}">
+                                            {{ __('I do not have account') }}
+                                        </a>
+                                    @endif
                             </div>
                             <div class="row">
                                 <div class="update ml-auto mr-auto">

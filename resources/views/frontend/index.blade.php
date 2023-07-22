@@ -11,13 +11,13 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-globe text-warning"></i>
+                                    <i class="nc-icon nc-diamond text-warning"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Capacity</p>
-                                    <p class="card-title">150GB<p>
+                                    <p class="card-category">All Brands</p>
+                                    <p class="card-title">{{number_format($data["countBrands"],0)}}<p>
                                 </div>
                             </div>
                         </div>
@@ -37,13 +37,13 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-money-coins text-success"></i>
+                                    <i class="nc-icon nc-pin-3 text-success"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Revenue</p>
-                                    <p class="card-title">$ 1,345<p>
+                                    <p class="card-category">All Stores</p>
+                                    <p class="card-title">{{number_format($data["countStores"],0)}}<p>
                                 </div>
                             </div>
                         </div>
@@ -51,8 +51,8 @@
                     <div class="card-footer ">
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-calendar-o"></i>
-                            Last day
+                            <i class="fa fa-refresh"></i>
+                            Update Now
                         </div>
                     </div>
                 </div>
@@ -63,13 +63,13 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-vector text-danger"></i>
+                                    <i class="nc-icon nc-tile-56 text-danger"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Errors</p>
-                                    <p class="card-title">23<p>
+                                    <p class="card-category">Active Brands</p>
+                                    <p class="card-title">{{number_format($data["activeBrands"],0)}}<p>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +77,8 @@
                     <div class="card-footer ">
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-clock-o"></i>
-                            In the last hour
+                            <i class="fa fa-refresh"></i>
+                            Update Now
                         </div>
                     </div>
                 </div>
@@ -89,13 +89,13 @@
                         <div class="row">
                             <div class="col-5 col-md-4">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-favourite-28 text-primary"></i>
+                                    <i class="nc-icon nc-shop text-primary"></i>
                                 </div>
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Followers</p>
-                                    <p class="card-title">+45K<p>
+                                    <p class="card-category">Active Stores</p>
+                                    <p class="card-title">{{number_format($data["activeStores"],0)}}<p>
                                 </div>
                             </div>
                         </div>

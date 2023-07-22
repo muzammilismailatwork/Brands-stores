@@ -16,7 +16,7 @@
                     </div>
                     </form>
                     <div class="col-md-4">
-                        <form method="GET" action="{{route("stores")}}">
+                        <form method="GET" action="{{route("manage_stores")}}">
                             <div class="ml-2 mx-3">
                                 <div class="form-group d-flex">
                                     <select name="sort" class="form-control mt-2 mb-2"   >

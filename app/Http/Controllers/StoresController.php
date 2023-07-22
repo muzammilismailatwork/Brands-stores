@@ -24,16 +24,29 @@ class StoresController extends Controller
 
     }
     public function manage_stores(Request $request){
-        if($request->sort == "random") {
-            $stores = Store::inRandomOrder()->paginate(5);
+        if(auth()->user() == null){
+            return redirect()->route("signin")->with("error","Please login for mange stores");
         }
-        elseif($request->sort == "oldest") {
-            $stores = Store::orderby("id", "asc")->paginate(5);
+        elseif(auth()->user()->admin) {
+            if ($request->sort == "random") {
+                $stores = Store::inRandomOrder()->paginate(5);
+            } elseif ($request->sort == "oldest") {
+                $stores = Store::orderby("id", "asc")->paginate(5);
+            } else {
+                $stores = Store::orderby("id", "desc")->paginate(5);
+            }
+            return view("frontend.manage_stores", compact("stores"));
         }
         else{
-            $stores = Store::orderby("id", "desc")->paginate(5);
+            if ($request->sort == "random") {
+                $stores = Store::where("user_id", auth()->user()->id)->inRandomOrder()->paginate(5);
+            } elseif ($request->sort == "oldest") {
+                $stores = Store::where("user_id", auth()->user()->id)->orderby("id", "asc")->paginate(5);
+            } else {
+                $stores = Store::where("user_id", auth()->user()->id)->orderby("id", "desc")->paginate(5);
+            }
+            return view("frontend.manage_stores", compact("stores"));
         }
-        return view("frontend.manage_stores", compact("stores"));
 
     }
     public function create(User $user){
@@ -53,6 +66,7 @@ class StoresController extends Controller
             "status" => "required",
             "brand_id" => "required",
         ]);
+        $x["user_id"]= auth()->user()->id;
         Store::create($x);
         return redirect()->route("stores")->with("success", "Store Created Successfully");
     }

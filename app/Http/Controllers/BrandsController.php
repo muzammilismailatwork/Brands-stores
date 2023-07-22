@@ -22,19 +22,38 @@ class BrandsController extends Controller
         return view("frontend.brands", compact("brands"));
     }
     public function manage_brands(Request $request){
-        if($request->sort == "random") {
-            $brands = Brand::inRandomOrder()->paginate(5);
+        if (auth()->user() == null){
+            return redirect()->route("signin")->with("error","Please login for mange brands");
         }
-        elseif($request->sort == "oldest") {
-            $brands = Brand::orderby("id", "asc")->paginate(5);
+        elseif (auth()->user()->admin) {
+            if ($request->sort == "random") {
+                $brands = Brand::inRandomOrder()->paginate(5);
+            } elseif ($request->sort == "oldest") {
+                $brands = Brand::orderby("id", "asc")->paginate(5);
+            } else {
+                $brands = Brand::orderby("id", "desc")->paginate(5);
+            }
+            return view("frontend.manage_brands", compact("brands"));
         }
         else{
-            $brands = Brand::orderby("id", "desc")->paginate(5);
+            if ($request->sort == "random") {
+                $brands = Brand::where("user_id", auth()->user()->id)->inRandomOrder()->paginate(5);
+            } elseif ($request->sort == "oldest") {
+                $brands = Brand::where("user_id", auth()->user()->id)->orderby("id", "asc")->paginate(5);
+            } else {
+                $brands = Brand::where("user_id", auth()->user()->id)->orderby("id", "desc")->paginate(5);
+            }
+            return view("frontend.manage_brands", compact("brands"));
         }
-        return view("frontend.manage_brands", compact("brands"));
     }
     public function create(){
+        if (auth()->user() != null){
             return view("frontend.create_brand");
+        }
+        else{
+            return redirect()->route("signin")->with("error","Please login for create brand");
+        }
+
 
     }
     public function add_brand(Request $request){
@@ -43,6 +62,7 @@ class BrandsController extends Controller
             "website" => "required|max:500",
             "status" => "required",
         ]);
+        $x["user_id"]= auth()->user()->id;
         Brand::create($x);
         return redirect()->route("create_store")->with("success", "Brand Created Successfully");
     }
