@@ -90,6 +90,11 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div class="custom-pagination">
+                                <ul class="pagination">
+                                    {{$stores->links('pagination::bootstrap-4')}}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

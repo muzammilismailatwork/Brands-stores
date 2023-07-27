@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $stores= Store::all();
         $countStores = $stores->count();
         $activeBrands =Brand::where("status", "Active")->count();
-        $activeStores =Brand::where("status", "Active")->count();
+        $activeStores =Store::where("status", "Active")->count();
         $data = [
             "countBrands"=>$countBrands,
             "countStores"=>$countStores,
